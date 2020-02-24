@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LocalEx.ClassLibs;
+using LocalEx.ClassLib;
 
 namespace LocalEx.UnitTests
 {
     [TestClass]
     public class StudentTest
     {
-        #region Properties Tests
+        #region Property Tests
 
         [TestMethod]
         public void Status_Default_Positive()
@@ -20,7 +20,7 @@ namespace LocalEx.UnitTests
         public void TuitionPaid_Default_Positive()
         {
             Student target = new Student("Name", 0);
-            Assert.AreEqual(target.TuitionPaid, Student.DEFAULT_TUITION_PAID);
+            Assert.AreEqual(target.IsTuitionPaid, Student.DEFAULT_IS_TUITION_PAID);
         }
 
         [TestMethod]
@@ -48,6 +48,7 @@ namespace LocalEx.UnitTests
             Student target = new Student("Name", 0);
             decimal expected = target.MakeTuitionPayment(Student.DEFAULT_TUITION_BALANCE);
             Assert.AreEqual(target.TuitionBalance, expected);
+            Assert.IsTrue(target.IsTuitionPaid);
         }
 
         [TestMethod]
@@ -56,6 +57,7 @@ namespace LocalEx.UnitTests
             Student target = new Student("Name", 0);
             decimal expected = target.MakeTuitionPayment(Student.DEFAULT_TUITION_BALANCE + 1);
             Assert.AreEqual(target.TuitionBalance, expected);
+            Assert.IsTrue(target.IsTuitionPaid);
         }
 
         [TestMethod]
@@ -63,7 +65,7 @@ namespace LocalEx.UnitTests
         public void MakeTuitionPayment_Zero_Negative()
         {
             Student target = new Student("Name", 0);
-            decimal expected = target.MakeTuitionPayment(0);
+            target.MakeTuitionPayment(0);
         }
 
         [TestMethod]
